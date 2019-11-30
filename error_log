@@ -1,0 +1,2 @@
+[27-Nov-2019 12:06:07 Asia/Jakarta] PHP Fatal error:  Call to undefined method PresensiModel::get_prodi() in /home/sttitpi/jajangtea/application/views/Presensi/home.php on line 29
+[27-Nov-2019 12:06:08 Asia/Jakarta] PHP Fatal error:  Call to undefined method PresensiModel::get_prodi() in /home/sttitpi/jajangtea/application/views/Presensi/home.php on line 29
