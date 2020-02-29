@@ -1,18 +1,22 @@
 <?php
 
-class PresensiModel extends CI_Model {
+class PresensiModel extends CI_Model
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->db2 = $this->load->database('db_simak', true);
     }
 
-    public function get_data() {
+    public function get_data()
+    {
         $this->db2->order_by('nama_mhs');
         return $this->db2->get('v_datamhs');
     }
 
-    public function get_ruang() {
+    public function get_ruang()
+    {
         $this->db2->distinct();
         $this->db2->select('vk.idruangkelas,rk.namaruang');
         $this->db2->from('v_kelas_mhs vk');
@@ -22,7 +26,8 @@ class PresensiModel extends CI_Model {
         return $query->result_array();
     }
 
-    public function get_hari($tahun, $semester, $iddosen) {
+    public function get_hari($tahun, $semester, $iddosen)
+    {
         $sql_hari = " SELECT DISTINCT (vkm.hari)
                         FROM v_kelas_mhs vkm
                         INNER JOIN krsmatkul km ON vkm.idkrsmatkul=km.idkrsmatkul
@@ -41,7 +46,8 @@ class PresensiModel extends CI_Model {
         return $query_hari->result_array();
     }
 
-    public function get_matakuliah($tahun, $semester, $iddosen) {
+    public function get_matakuliah($tahun, $semester, $iddosen)
+    {
         $sql_semester = "SELECT  mkul.nmatkul,mkul.kmatkul AS kode FROM v_kelas_mhs vkm INNER JOIN krsmatkul km ON vkm.idkrsmatkul=km.idkrsmatkul 
                         INNER JOIN krs kr ON km.idkrs=kr.idkrs INNER JOIN register_mahasiswa rm ON kr.nim=rm.nim 
                         INNER JOIN formulir_pendaftaran fp ON rm.no_formulir=fp.no_formulir 
@@ -56,7 +62,8 @@ class PresensiModel extends CI_Model {
         return $query_semester->result_array();
     }
 
-    public function get_nama_kelas($tahun, $semester, $iddosen) {
+    public function get_nama_kelas($tahun, $semester, $iddosen)
+    {
         $sql_nama_kelas = "SELECT  vkm.nama_kelas AS nama_kelas FROM v_kelas_mhs vkm INNER JOIN krsmatkul km ON vkm.idkrsmatkul=km.idkrsmatkul 
                         INNER JOIN krs kr ON km.idkrs=kr.idkrs INNER JOIN register_mahasiswa rm ON kr.nim=rm.nim 
                         INNER JOIN formulir_pendaftaran fp ON rm.no_formulir=fp.no_formulir 
@@ -71,7 +78,8 @@ class PresensiModel extends CI_Model {
         return $query_nama_kelas->result_array();
     }
 
-    public static function get_nama_hari($id_hari) {
+    public static function get_nama_hari($id_hari)
+    {
         if ($id_hari == 1) {
             return "Senin";
         } elseif ($id_hari == 2) {
@@ -87,7 +95,8 @@ class PresensiModel extends CI_Model {
         }
     }
 
-    public static function get_nama_semester($idsmt) {
+    public static function get_nama_semester($idsmt)
+    {
         if ($idsmt == 1) {
             return "Ganjil";
         } elseif ($idsmt == 2) {
@@ -97,7 +106,8 @@ class PresensiModel extends CI_Model {
         }
     }
 
-    public static function get_nama_kelompok($id_kelompok) {
+    public static function get_nama_kelompok($id_kelompok)
+    {
         if ($id_kelompok == 1) {
             return "A";
         } elseif ($id_kelompok == 2) {
@@ -107,28 +117,31 @@ class PresensiModel extends CI_Model {
         }
     }
 
-    public static function tampil_nama_prodi($kode) {
+    public static function tampil_nama_prodi($kode)
+    {
         switch ($kode) {
-            case 12 :
+            case 12:
                 $prodi = "TEKNIK INFORMATIKA";
                 break;
-            case 32 :
+            case 32:
                 $prodi = "SISTEM INFORMASI";
                 break;
-            case 42 :
+            case 42:
                 $prodi = "SISTEM INFORMASI KONSETRASI KOMPUTER AKUNTANSI";
                 break;
-            default :
+            default:
                 $prodi = "Kode Prodi tidak ditemukan.";
         }
         return $prodi;
     }
 
-    public function get_yes() {
-        return $this->db->get_where('penyelenggaraan', array('status' => 'yes'))->row();
+    public function get_yes()
+    {
+        return $this->db->get_where('sia_penyelenggaraan', array('status' => 'yes'))->row();
     }
 
-    public function get_jadwal_dosen($tahun, $semester, $iddosen) {
+    public function get_jadwal_dosen($tahun, $semester, $iddosen)
+    {
         $sql_jadwal_dosen = "SELECT  vkm.idpenyelenggaraan,mkul.nmatkul,mkul.kmatkul AS kode ,vkm.hari,vkm.jam_masuk,vkm.jam_keluar,pn.kjur,vkm.idkelas  FROM v_kelas_mhs vkm INNER JOIN krsmatkul km ON vkm.idkrsmatkul=km.idkrsmatkul 
                             INNER JOIN krs kr ON km.idkrs=kr.idkrs INNER JOIN register_mahasiswa rm ON kr.nim=rm.nim 
                             INNER JOIN formulir_pendaftaran fp ON rm.no_formulir=fp.no_formulir 
@@ -143,7 +156,8 @@ class PresensiModel extends CI_Model {
         return $query_jadwal_dosen;
     }
 
-    public function get_mahasiswa($idpenyelenggaraan, $id_kelas) {
+    public function get_mahasiswa($idpenyelenggaraan, $id_kelas)
+    {
         $sql_mahasiswa = "SELECT * FROM v_kelas_mhs vkm
                 INNER JOIN krsmatkul km ON vkm.idkrsmatkul=km.idkrsmatkul
                 INNER JOIN krs kr ON km.idkrs=kr.idkrs
@@ -158,7 +172,8 @@ class PresensiModel extends CI_Model {
         return $query_mahasiswa;
     }
 
-    public function get_detil_mahasiswa($idpenyelenggaraan, $id_kelas) {
+    public function get_detil_mahasiswa($idpenyelenggaraan, $id_kelas)
+    {
         $sql_mahasiswa = "SELECT * FROM v_kelas_mhs vkm
                 INNER JOIN krsmatkul km ON vkm.idkrsmatkul=km.idkrsmatkul
                 INNER JOIN krs kr ON km.idkrs=kr.idkrs
@@ -168,13 +183,12 @@ class PresensiModel extends CI_Model {
                 INNER JOIN matakuliah mkul ON pn.kmatkul=mkul.kmatkul
                 WHERE
                 vkm.idpenyelenggaraan='$idpenyelenggaraan' and vkm.idkelas='$id_kelas' group by vkm.idkelas order by fp.nama_mhs asc";
-
         $query_mahasiswa = $this->db2->query($sql_mahasiswa);
-
         return $query_mahasiswa;
     }
 
-    public function get_tampil_mahasiswa($idpenyelenggaraan, $kelompok, $idkelas) {
+    public function get_tampil_mahasiswa($idpenyelenggaraan, $kelompok, $idkelas)
+    {
         $sql_mahasiswa = "SELECT * FROM v_kelas_mhs vkm
                 INNER JOIN krsmatkul km ON vkm.idkrsmatkul=km.idkrsmatkul
                 INNER JOIN krs kr ON km.idkrs=kr.idkrs
@@ -184,12 +198,18 @@ class PresensiModel extends CI_Model {
                 INNER JOIN matakuliah mkul ON pn.kmatkul=mkul.kmatkul
                 WHERE
                 vkm.idpenyelenggaraan='$idpenyelenggaraan' and vkm.nama_kelas='$kelompok' and vkm.idkelas='$idkelas' order by fp.nama_mhs asc";
-
         $query_mahasiswa = $this->db2->query($sql_mahasiswa);
         return $query_mahasiswa;
     }
 
-    public function get_jam_ngajar($idpenyelenggaraan, $kelompok, $idkelas) {
+    public function get_data_kehadiran($idkehadiran)
+    {
+        $query_kehadiran = $this->db->get_where('sia_kehadiran', array('id_kehadiran_master' => $idkehadiran));
+        return $query_kehadiran;
+    }
+
+    public function get_jam_ngajar($idpenyelenggaraan, $kelompok, $idkelas)
+    {
         $sql_jam_ngajar = "SELECT distinct vkm.jam_masuk,vkm.jam_keluar FROM v_kelas_mhs vkm
                 INNER JOIN krsmatkul km ON vkm.idkrsmatkul=km.idkrsmatkul
                 INNER JOIN krs kr ON km.idkrs=kr.idkrs
@@ -203,7 +223,8 @@ class PresensiModel extends CI_Model {
         return $query_jam_ngajar;
     }
 
-    public static function get_prodi($kode) {
+    public static function get_prodi($kode)
+    {
         if ($kode == '12') {
             return 'TEKNIK INFORMATIKA';
         } elseif ($kode == '32') {
@@ -213,7 +234,8 @@ class PresensiModel extends CI_Model {
         }
     }
 
-    public static function get_kelas($kode) {
+    public static function get_kelas($kode)
+    {
         if ($kode == 'A') {
             return 'REGULER (S1)';
         } elseif ($kode == 'B') {
@@ -225,17 +247,20 @@ class PresensiModel extends CI_Model {
         }
     }
 
-    function simpan_kehadiran($data) {
+    function simpan_kehadiran($data)
+    {
         $this->db = $this->load->database();
-        return $this->db->insert('kehadiran', $data);
+        return $this->db->insert('sia_kehadiran', $data);
     }
 
-    function simpan_pertemuan_master($data) {
-        return $this->db->insert('kehadiran_master', $data);
+    function simpan_pertemuan_master($data)
+    {
+        return $this->db->insert('sia_kehadiran_master', $data);
     }
 
-    function get_kehadiran_master($idpenyelenggaraan, $nama_kelompok, $idkelas) {
-        $query = $this->db->get_where('kehadiran_master', array(
+    function get_kehadiran_master($idpenyelenggaraan, $nama_kelompok, $idkelas)
+    {
+        $query = $this->db->get_where('sia_kehadiran_master', array(
             'idpenyelenggaraan' => $idpenyelenggaraan,
             'nama_kelas' => $nama_kelompok,
             'idkelas' => $idkelas,

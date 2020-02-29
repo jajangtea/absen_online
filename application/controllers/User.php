@@ -22,7 +22,7 @@ class User extends MY_Controller
                 'iddosen' => $this->input->post('iddosen'),
             );
 
-            $this->db->insert('user', $data);
+            $this->db->insert('sia_user', $data);
             $this->session->set_flashdata('pesan_register','Berhasil');
             redirect(base_url() . 'user/register');
         } else {

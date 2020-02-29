@@ -66,6 +66,7 @@
                     <div class="col-lg-12 col-md-12 mb-4">
                         <form action="<?php echo site_url() . 'kehadiran' ?>" method="POST">
                             <input type="hidden" id="hidden1" value="" name="hidden1" />
+                            <input type="hidden" id="hidden_id" value="" name="hidden_id" />
                             <table class="table table-hover" id="table">
                                 <thead>
                                     <tr>
@@ -78,7 +79,7 @@
                                     <?php if ($data_kehadiran_master->num_rows() > 0): ?>
                                         <?php foreach ($data_kehadiran_master->result() as $data): ?>
                                             <tr>
-                                                <td>Pertemuan Ke-<?= $data->pertemuan ?></td>
+                                                <td>Ke-<?= $data->pertemuan ?></td>
                                                 <td>
                                                     <?= ($data->status) == '' ? '<span class="mb-2 badge badge-pill badge-danger">Belum Absen</span>' : '<span class="mb-2 badge badge-pill badge-primary">' . $data->status . '</span>' ?></span>
 
@@ -100,7 +101,8 @@
     var table = document.getElementById("table");
     for (var i = 1; i < table.rows.length; i++) {
         table.rows[i].onclick = function () {
-            document.getElementById("hidden1").value = this.cells[0].innerHTML;
+            document.getElementById("hidden_id").value = this.cells[0].innerHTML;
+            document.getElementById("hidden1").value = this.cells[1].innerHTML;
         };
     }
 </script>

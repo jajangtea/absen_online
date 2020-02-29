@@ -21,7 +21,7 @@ class Presensi extends MY_Controller {
         $data['data_nama_kelas'] = $this->PresensiModel->get_nama_kelas($yes->tahun, $yes->semester, $this->session->userdata('iddosen'));
         $this->load->view('layouts/header');
         $this->load->view('layouts/sidebar');
-        $this->load->view('Presensi/home', $data);
+        $this->load->view('presensi/home', $data);
         $this->load->view('layouts/footer');
     }
 
@@ -43,7 +43,7 @@ class Presensi extends MY_Controller {
         }
         $this->load->view('layouts/header');
         $this->load->view('layouts/sidebar');
-        $this->load->view('Presensi/data_mhs', $data);
+        $this->load->view('presensi/data_mhs', $data);
         $this->load->view('layouts/footer');
     }
 
@@ -64,13 +64,13 @@ class Presensi extends MY_Controller {
         if ($data['data_kehadiran_master']->num_rows() == 0) {
             $pertemuan_karyawan = 14;
             for ($i = 1; $pertemuan_karyawan >= $i; $i++) {
-                $this->db->query("insert into kehadiran_master(iddosen,idpenyelenggaraan,idkelas,nama_kelas,kode_mkul,matakuliah,pertemuan)values('" . $this->session->userdata('iddosen') . "','" . $idpenyelenggaraans . "','" . $this->session->userdata('kls') . "','" . $nama_kelas . "','" . $this->session->userdata('kode') . "','" . $this->session->userdata('nmatkul') . "','" . $i . "')");
+                $this->db->query("insert into sia_kehadiran_master(iddosen,idpenyelenggaraan,idkelas,nama_kelas,kode_mkul,matakuliah,pertemuan)values('" . $this->session->userdata('iddosen') . "','" . $idpenyelenggaraans . "','" . $this->session->userdata('kls') . "','" . $nama_kelas . "','" . $this->session->userdata('kode') . "','" . $this->session->userdata('nmatkul') . "','" . $i . "')");
             }
         }
         $data['data_kehadiran_master'] = $this->PresensiModel->get_kehadiran_master($idpenyelenggaraans, $nama_kelompok, $this->session->userdata('kls'));
         $this->load->view('layouts/header');
         $this->load->view('layouts/sidebar');
-        $this->load->view('Presensi/data_mhs', $data);
+        $this->load->view('presensi/data_mhs', $data);
         $this->load->view('layouts/footer');
     }
 

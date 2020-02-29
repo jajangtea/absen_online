@@ -2,7 +2,6 @@
     <div class="row">
         <div class="col-md-12 mb-4">
             <div class="card">
-                <img class="card-img-top" src="holder.js/100x180/" alt="">
                 <div class="card-body">
                   <?php if($this->session->flashdata('pesan_register')):?>
                     <div class="alert alert-success rounded" role="alert">

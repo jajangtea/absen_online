@@ -12,15 +12,13 @@ class Pengguna extends MY_Controller
 
     public function index()
     {
+
         $data['semua_data'] = $this->PenggunaModel->tampilSemua();
-        $data['rata_umur']=$this->PenggunaModel->getrata2();
-        $data['total_umur']=$this->PenggunaModel->get_total_umur();
-
-
         $this->load->view('layouts/header');
         $this->load->view('layouts/sidebar');
         $this->load->view('Pengguna/index', $data);
         $this->load->view('layouts/footer');
+
 
     }
 
