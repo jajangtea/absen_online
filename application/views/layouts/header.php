@@ -22,6 +22,9 @@
      <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/component-custom-switch.min.css" />
      <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/main.css" />
     <!-- </style> -->
+    <script>
+    var base_url = '<?= base_url() ?>' // Buat variabel base_url agar bisa di akses di semua file js
+    </script>
 </head>
 <body id="app-container" class="menu-default show-spinner">
 <nav class="navbar fixed-top">

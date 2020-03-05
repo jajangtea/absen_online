@@ -79,12 +79,13 @@
                                     <?php if ($data_kehadiran_master->num_rows() > 0): ?>
                                         <?php foreach ($data_kehadiran_master->result() as $data): ?>
                                             <tr>
+                                                <td style="display:none;"><?= $data->id ?></td>
                                                 <td>Ke-<?= $data->pertemuan ?></td>
                                                 <td>
                                                     <?= ($data->status) == '' ? '<span class="mb-2 badge badge-pill badge-danger">Belum Absen</span>' : '<span class="mb-2 badge badge-pill badge-primary">' . $data->status . '</span>' ?></span>
 
                                                 </td>
-                                                <td><input type="submit" class="btn btn-primary" value="GO"></td>
+                                                <td><input type="submit" class="btn btn-primary btn-xs mb-1" value="GO"></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php endif; ?>

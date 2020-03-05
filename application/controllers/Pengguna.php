@@ -16,7 +16,7 @@ class Pengguna extends MY_Controller
         $data['semua_data'] = $this->PenggunaModel->tampilSemua();
         $this->load->view('layouts/header');
         $this->load->view('layouts/sidebar');
-        $this->load->view('Pengguna/index', $data);
+        $this->load->view('pengguna/index', $data);
         $this->load->view('layouts/footer');
 
 
@@ -25,7 +25,7 @@ class Pengguna extends MY_Controller
     public function tambah()
     {
         $this->load->view('layouts/header');
-        $this->load->view('Pengguna/create');
+        $this->load->view('pengguna/create');
         $this->load->view('layouts/footer');
     }
 
@@ -64,7 +64,7 @@ class Pengguna extends MY_Controller
 
         if ($this->form_validation->run() == false){
             $this->load->view('layouts/header');
-            $this->load->view('Pengguna/create');
+            $this->load->view('pengguna/create');
             $this->load->view('layouts/footer');
         } else {
             $this->session->set_flashdata('tambah', flase);
