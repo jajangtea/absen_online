@@ -4,25 +4,23 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <?php if ($this->session->flashdata('tambah')): ?>
-                        <?php if ($this->session->flashdata('tambah') == true): ?>
-                        <div class="alert alert-success">Berhasil menambahkan pengguna baru</div>
-                        <?php elseif ($this->session->flashdata('tambah') == false): ?>
-                        <div class="alert alert-danger">Gagal menambahkan pengguna baru</div>
-                        <?php endif; ?>
+                        <?php if ($this->session->flashdata('tambah')) : ?>
+                            <?php if ($this->session->flashdata('tambah') == true) : ?>
+                                <div class="alert alert-success">Berhasil menambahkan pengguna baru</div>
+                            <?php elseif ($this->session->flashdata('tambah') == false) : ?>
+                                <div class="alert alert-danger">Gagal menambahkan pengguna baru</div>
+                            <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if ($this->session->flashdata('hapus')): ?>
-                        <?php if ($this->session->flashdata('hapus') == true): ?>
-                        <div class="alert alert-success">Berhasil menghapus pengguna</div>
-                        <?php elseif ($this->session->flashdata('hapus') == false): ?>
-                        <div class="alert alert-danger">Gagal menghapus pengguna </div>
-                        <?php endif; ?>
+                        <?php if ($this->session->flashdata('hapus')) : ?>
+                            <?php if ($this->session->flashdata('hapus') == true) : ?>
+                                <div class="alert alert-success">Berhasil menghapus pengguna</div>
+                            <?php elseif ($this->session->flashdata('hapus') == false) : ?>
+                                <div class="alert alert-danger">Gagal menghapus pengguna </div>
+                            <?php endif; ?>
                         <?php endif; ?>
                         <div class="mb-2">
-                            <a class="btn pt-0 pl-0 d-inline-block d-md-none" data-toggle="collapse"
-                                href="#displayOptions" role="button" aria-expanded="true"
-                                aria-controls="displayOptions">
+                            <a class="btn pt-0 pl-0 d-inline-block d-md-none" data-toggle="collapse" href="#displayOptions" role="button" aria-expanded="true" aria-controls="displayOptions">
                                 Display Options
                                 <i class="simple-icon-arrow-down align-middle"></i>
                             </a>
@@ -34,8 +32,7 @@
                                 </div>
                                 <div class="float-md-right dropdown-as-select" id="pageCountDatatable">
                                     <span class="text-muted text-small">Displaying 1-10 of 40 items </span>
-                                    <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         10
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
@@ -50,8 +47,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 mb-4 data-table-rows data-tables-hide-filter">
-                            <table id="datatableRows" class="data-table responsive nowrap"
-                                data-order="[[ 1, &quot;desc&quot; ]]">
+                            <table id="datatableRows" class="data-table responsive nowrap" data-order="[[ 1, &quot;desc&quot; ]]">
                                 <thead>
                                     <tr>
                                         <th style="text-align: center;">USERNAME</th>
@@ -61,20 +57,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if ($semua_data->num_rows() > 0): ?>
-                                    <?php foreach ($semua_data->result() as $pengguna): ?>
-                                    <tr>
-                                        <td style="text-align: center;"><?=strtoupper($pengguna->username); ?></td>
-                                        <td><?=strtoupper($pengguna->nama); ?></td>
-                                        <td style="text-align: center;"><?=$pengguna->role; ?></td>
-                                        <td style="text-align: center;">
-                                            <a href="<?=base_url('index.php/pengguna/edit/' . $pengguna->id); ?>"
-                                                class="btn btn-success">Edit</a>
-                                            <a href="<?=base_url('index.php/pengguna/hapus/' . $pengguna->id); ?>"
-                                                class="btn btn-danger">Hapus</a>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
+                                    <?php if ($semua_data->num_rows() > 0) : ?>
+                                        <?php foreach ($semua_data->result() as $pengguna) : ?>
+                                            <tr>
+                                                <td style="text-align: center;"><?= strtoupper($pengguna->username); ?></td>
+                                                <td><?= strtoupper($pengguna->nama); ?></td>
+                                                <td style="text-align: center;"><?= $pengguna->role; ?></td>
+                                                <td style="text-align: center;">
+                                                    <a href="<?= base_url('pengguna/edit/' . $pengguna->id); ?>" class="btn btn-primary">Edit</a>
+                                                    <a href="<?= base_url('pengguna/hapus/' . $pengguna->id); ?>" class="btn btn-danger">Hapus</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     <?php endif; ?>
                                 </tbody>
                             </table>
@@ -84,3 +78,37 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="exampleModalContent" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalContentLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="username-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nama:</label>
+                            <input type="text" class="form-control" id="nama-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Role:</label>
+                            <textarea class="form-control" id="role-name"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

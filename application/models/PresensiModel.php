@@ -281,15 +281,38 @@ class PresensiModel extends CI_Model
         return $query;
     }
 
-     public function edit($id)
+    public function edit($id)
     {
         $this->db->select('*');
         $this->db->from('sia_kehadiran join master_mhs on sia_kehadiran.nim=master_mhs.nim');
         $this->db->where(array('id' => $id));
-        $result=$this->db->get();
+        $result = $this->db->get();
         return $result;
-
     }
 
-    
+    function cari_data($query)
+    {
+        $str = $this->session->userdata('pertemuanke');
+        $id = explode("-", $str);
+        $pertemuanke= $id[1];
+        $this->db->select("*,sia_kehadiran.id as id");
+        $this->db->from('sia_kehadiran');
+        $this->db->join('master_mhs', 'master_mhs.nim = sia_kehadiran.nim');
+        $this->db->join('sia_kehadiran_master', 'sia_kehadiran_master.id = sia_kehadiran.id_kehadiran_master');
+        $this->db->where('id_kehadiran_master', $this->session->userdata('hidden_id'));
+        $this->db->where('pertemuan', $pertemuanke);
+        $this->db->like('master_mhs.nama_mhs', $query);
+        $this->db->order_by('master_mhs.nama_mhs', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    static function get_day($date){
+        if(is_null($date)){
+            $day="";
+        }else{
+            $timestamp = strtotime($date);
+            $day = date('D', $timestamp);
+        }
+        return $day;
+    }
 }

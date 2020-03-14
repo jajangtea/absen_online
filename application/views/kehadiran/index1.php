@@ -46,7 +46,6 @@
                             </div>
                         </div>
                     <?php endforeach; ?>
-
                     <div class="card d-flex flex-row mb-3">
                         <div class="d-flex flex-grow-1 min-width-zero">
                             <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
@@ -68,6 +67,7 @@
             <div class="card">
                 <div class="card-body">
                     <h1>Data Kehadiran Pertemuan <?php echo $this->session->userdata('pertemuanke') ?> </h1>
+
                     <div class="mb-2">
                         <a class="btn pt-0 pl-0 d-inline-block d-md-none" data-toggle="collapse" href="#displayOptions" role="button" aria-expanded="true" aria-controls="displayOptions">
                             Display Options
@@ -77,14 +77,26 @@
 
                             <div class="float-md-right dropdown-as-select" id="pageCountDatatable">
                                 <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
-                                    <input class="form-control" placeholder="Search Table" id="search_text" name="search_text">
+                                    <input class="form-control" placeholder="Search Table" id="searchDatatable">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div id="show_data"></div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>NAMA</th>
+                                    <th style="text-align: center;">KETERANGAN</th>
+                                    <th style="text-align: center;">AKSI</th>
+                                </tr>
+                            </thead>
+                            <tbody id="show_data">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -92,19 +104,16 @@
 </div>
 
 <!-- MODAL EDIT -->
-<div class="modal fade modal-right" id="ModalaEdit" tabindex="-1" role="dialog" aria-labelledby="rightModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalaEdit">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">
-                    <!-- Beri id "modal-title" untuk tag span pada judul modal -->
-                    <span id="exampleModalLabel"></span>
+                    <span id="modal-title"></span>
                 </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
-            <form class="form-horizontal" id="addToDatatableForm" novalidate>
+            <form class="form-horizontal">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label col-xs-3">NIM</label>
@@ -129,22 +138,9 @@
                     </div>
                     <input type="hidden" name="hidden_edit" id="hidden_id" class="hidden_id-value">
                 </div>
-
                 <div class="modal-footer">
-                    <a href="#" class="btn btn-primary btn-multiple-state" id="btn_update">
-                        <div class="spinner d-inline-block">
-                            <div class="bounce1"></div>
-                            <div class="bounce2"></div>
-                            <div class="bounce3"></div>
-                        </div>
-                        <span class="icon success" data-toggle="tooltip" data-placement="top" title="Everything went right!">
-                            <i class="simple-icon-check"></i>
-                        </span>
-                        <span class="icon fail" data-toggle="tooltip" data-placement="top" title="Something went wrong!">
-                            <i class="simple-icon-exclamation"></i>
-                        </span>
-                        <span class="label">Done</span>
-                    </a>
+                    <button class="btn"  data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button class="btn btn-info" id="btn_update">Update</button>
                 </div>
             </form>
         </div>
@@ -154,22 +150,22 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalSimpan" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">
                     <!-- Beri id "modal-title" untuk tag span pada judul modal -->
-                    <span id="exampleModalLabel"></span>
+                    <span id="modalLabelSimpan"></span>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body-simpan">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btn_close" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

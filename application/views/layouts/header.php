@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CRUD</title>
+    <title><?=$this->config->config["pageTitle"]?></title>
    
      <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/font/iconsmind-s/css/iconsminds.css" />
      <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/font/simple-line-icons/css/simple-line-icons.css" />

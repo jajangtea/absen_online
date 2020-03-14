@@ -3,25 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dore jQuery</title>
+    <title><?= $this->config->config["pageTitle"] ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/font/iconsmind-s/css/iconsminds.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/font/simple-line-icons/css/simple-line-icons.css" />
-
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap.rtl.only.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/fullcalendar.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/dataTables.bootstrap4.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/datatables.responsive.bootstrap4.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/select2.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/perfect-scrollbar.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/owl.carousel.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap-stars.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/nouislider.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap-datepicker3.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/component-custom-switch.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/main.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/font/simple-line-icons/css/simple-line-icons.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap.rtl.only.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/fullcalendar.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/datatables.responsive.bootstrap4.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/select2.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/owl.carousel.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap-stars.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/nouislider.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/component-custom-switch.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/main.css" />
 </head>
 
 <body class="background show-spinner">
@@ -33,23 +31,17 @@
                     <div class="card auth-card">
                         <div class="position-relative image-side ">
 
-                            <p class=" text-white h2">MAGIC IS IN THE DETAILS</p>
-
-                            <p class="white mb-0">
-                                Please use your credentials to login.
-                                <br>If you are not a member, please
-                                <a href="#" class="white">register</a>.
-                            </p>
                         </div>
                         <div class="form-side">
-                            <a href="Dashboard.Default.html">
-                                <span class="logo-single"></span>
+                            <a href="#">
+                                <h3>SISTEM INFORMASI ABSENSI DAN PRESENSI (SIAP)</h3>
+                                <p>STT Indonesia Tanjungpinang</p>
                             </a>
                             <h6 class="mb-4">Login</h6>
-                            <form action="<?php echo base_url().'auth/login'?>" method="post">
+                            <form action="<?php echo base_url() . 'auth/login' ?>" method="post">
                                 <label class="form-group has-float-label mb-4">
                                     <input class="form-control" name="username" />
-                                    <span>E-mail</span>
+                                    <span>Username</span>
                                 </label>
 
                                 <label class="form-group has-float-label mb-4">
@@ -57,8 +49,20 @@
                                     <span>Password</span>
                                 </label>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span></span>
                                     <button class="btn btn-primary btn-lg btn-shadow" type="submit">LOGIN</button>
+                                </div>
+                                <br>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <?php if ($this->session->flashdata('message')) : ?>
+                                        <?php if ($this->session->flashdata('message') == true) : ?>
+                                            <div class="alert alert-danger alert-dismissible fade show rounded mb-0" role="alert">
+                                                <strong>Peringatan !</strong> <?= $this->session->flashdata('message') ?>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </form>
                         </div>
@@ -86,5 +90,4 @@
     <script src="<?php echo base_url() ?>assets/dore/js/dore.script.js"></script>
     <script src="<?php echo base_url() ?>assets/dore/js/scripts.js"></script>
 </body>
-
 </html>

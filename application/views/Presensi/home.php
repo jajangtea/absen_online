@@ -35,41 +35,61 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="mb-4">DATA ABSEN</h5>
+                    <form action="<?php echo site_url() . 'presensi/cari' ?>" method="post">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <select class="form-control" name="semester" id="semester">
+                                    <option value="1" selected>GANJIL</option>
+                                    <option value="2">GENAP</option>
+                                    <option value="3">PENDEK</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button type=" submit" class="btn btn-primary">Tampilkan</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12 list" data-check-all="checkAll">
-            <?php if ($sql_jadwal_dosen->num_rows() > 0): ?>
-            <?php $index = 1; ?>
-            <?php foreach ($sql_jadwal_dosen->result() as $data): ?>
-            <div class="card d-flex flex-row mb-3">
-                <a class="d-flex"
-                    href="<?php echo base_url() . 'presensi/tampil_absen/' . $data->idpenyelenggaraan . '/' . $data->idkelas ?>">
-                    <input type=image src="<?php echo base_url() . 'assets/dore/img/fat-rascal-thumb.jpg' ?>"
-                        class="list-thumbnail responsive border-0 card-img-left" />
-                </a>
-                <div class="pl-2 d-flex flex-grow-1 min-width-zero">
-                    <div
-                        class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
-                        <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">
-                            <?php $this->session->set_userdata('kode', $data->kode); ?>
-                            <?= $data->nmatkul; ?>
+            <?php if ($sql_jadwal_dosen->num_rows() > 0) : ?>
+                <?php $index = 1; ?>
+                <?php foreach ($sql_jadwal_dosen->result() as $data) : ?>
+                    <div class="card d-flex flex-row mb-3">
+                        <a class="d-flex" href="<?php echo base_url() . 'presensi/tampil_absen/' . $data->idpenyelenggaraan . '/' . $data->idkelas ?>">
+                            <input type=image src="<?php echo base_url() . 'assets/dore/img/fat-rascal-thumb.jpg' ?>" class="list-thumbnail responsive border-0 card-img-left" />
                         </a>
-                        <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">
-                            <?= PresensiModel::get_prodi($data->kjur); ?>
-                        </a>
-                        <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">
-                            <?php 
+                        <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                            <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
+                                <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">
+                                    <?php $this->session->set_userdata('kode', $data->kode); ?>
+                                    <?= $data->nmatkul; ?>
+                                </a>
+                                <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">
+                                    <?= PresensiModel::get_prodi($data->kjur); ?>
+                                </a>
+                                <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">
+                                    <?php
                                     $this->session->set_userdata('jam_masuk', $data->jam_masuk);
                                     $this->session->set_userdata('jam_keluar', $data->jam_keluar);
                                     ?>
-                            <small>
-                                <span class="badge badge-pill badge-success">
-                                    <?= PresensiModel::get_nama_hari($data->hari); ?></span>
-                                <span class="badge badge-pill badge-danger"><?= PresensiModel::get_kelas($data->idkelas) ?></span>
-                            </small>
-                        </a>
+                                    <small>
+                                        <span class="badge badge-pill badge-success">
+                                            <?= PresensiModel::get_nama_hari($data->hari); ?></span>
+                                        <span class="badge badge-pill badge-danger"><?= PresensiModel::get_kelas($data->idkelas) ?></span>
+                                    </small>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
             <?php endif; ?>
             </form>
         </div>
@@ -77,10 +97,10 @@
 
 </div>
 <script>
-var table = document.getElementById("table");
-for (var i = 1; i < table.rows.length; i++) {
-    table.rows[i].onclick = function() {
-        document.getElementById("hidden_idpenyelenggaraan").value = this.cells[7].innerHTML;
-    };
-}
+    var table = document.getElementById("table");
+    for (var i = 1; i < table.rows.length; i++) {
+        table.rows[i].onclick = function() {
+            document.getElementById("hidden_idpenyelenggaraan").value = this.cells[7].innerHTML;
+        };
+    }
 </script>

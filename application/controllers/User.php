@@ -10,7 +10,7 @@ class User extends MY_Controller
 
     public function signup()
     {
-
+        $this->config->config["pageTitle"] = 'Registrasi';
         if ($this->input->method() === 'post') {
            $key_pass=md5(rand());
             $data = array(
@@ -31,6 +31,7 @@ class User extends MY_Controller
     }
     public function register()
     {
+        $this->config->config["pageTitle"] = 'Registrasi';
         $data['data_dosen'] = $this->RegisterModel->get_dosen();
         $this->load->view('layouts/header');
         $this->load->view('layouts/sidebar');

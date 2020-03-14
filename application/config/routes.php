@@ -55,8 +55,8 @@ $route['signout'] = 'LoginController/actionLogout';
 $route['pengguna'] = 'Pengguna/index';
 $route['pengguna/tambah'] = 'Pengguna/tambah';
 $route['pengguna/simpan'] = 'pengguna_controller/simpan';
-$route['pengguna/edit/(:num)'] = 'pengguna_controller/edit/$1';
-$route['pengguna/hapus/(:num)'] = 'pengguna_controller/hapus/$1';
+$route['pengguna/edit/(:num)'] = 'Pengguna/edit/$1';
+$route['pengguna/hapus/(:num)'] = 'Pengguna/hapus/$1';
 
 $route['buku/index']='BukuController/index';
 $route['buku/view/(:num)'] = 'BukuController/view/$1';

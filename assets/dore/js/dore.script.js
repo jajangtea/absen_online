@@ -2774,7 +2774,7 @@ $.dore = function(element, options) {
                 destroy: true,
                 info: false,
                 sDom: '<"row view-filter"<"col-sm-12"<"float-left"l><"float-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>',
-                pageLength: 6,
+                pageLength: 10,
                 language: {
                     paginate: {
                         previous: "<i class='simple-icon-arrow-left'></i>",
@@ -2799,7 +2799,7 @@ $.dore = function(element, options) {
                 destroy: true,
                 info: false,
                 sDom: '<"row view-filter"<"col-sm-12"<"float-left"l><"float-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>',
-                pageLength: 8,
+                pageLength: 10,
                 language: {
                     paginate: {
                         previous: "<i class='simple-icon-arrow-left'></i>",
@@ -2969,27 +2969,17 @@ $.dore = function(element, options) {
                 $dataTableRows.page.len(parseInt(selText)).draw();
             });
 
-            var $addToDatatableButton = $("#addToDatatable").stateButton();
+            var $addToDatatableButton = $("#btn_update").stateButton();
 
             // Validation when modal shown
-            $('#rightModal').on('shown.bs.modal', function(e) {
+            $('#ModalaEdit').on('shown.bs.modal', function(e) {
                 $("#addToDatatableForm").validate({
                     rules: {
-                        Sales: {
+                        keterangan_edit: {
                             required: true,
                             number: true,
                             min: 3000
                         },
-                        Stock: {
-                            required: true,
-                            number: true,
-                        },
-                        Category: {
-                            required: true
-                        },
-                        Name: {
-                            required: true
-                        }
                     }
                 })
             })
@@ -3007,7 +2997,7 @@ $.dore = function(element, options) {
                     setTimeout(() => {
                         $addToDatatableButton.showSuccess(true, "New row added!");
                         setTimeout(() => {
-                            $("#rightModal").modal("toggle");
+                            $("#ModalaEdit").modal("toggle");
                             $addToDatatableButton.reset();
                             inputs.each(function() {
                                 $(this).val("");

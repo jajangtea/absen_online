@@ -10,15 +10,32 @@ $(document).ready(function() {
             success: function(data) {
                 var html = '';
                 var i;
-                var j = 1;
                 for (i = 0; i < data.length; i++) {
-                    html += '<tr>' +
-                        '<td>' + data[i].nama_mhs + '<span class="mb-0 text-muted text-small w-15 w-xs-100">' + data[i].nim + '</span></td>' +
-                        '<td style="text-align: center;"><span class="mb-2 badge badge-pill badge-danger">' + absen_mhs(data[i].absen) + ';' + data[i].keterangan.toUpperCase() + '</span></td>' +
-                        '<td style="text-align:center;">' +
-                        '<a href="javascript:;" class="btn btn-success btn-xs item_edit" data="' + data[i].id + '">EDIT</a>' + ' ' +
-                        '</td>' +
-                        '</tr>';
+                    html += '<div class="card d-flex flex-row mb-3">' +
+                        '<div class="d-flex flex-grow-1 min-width-zero">' +
+                        '<div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">' +
+
+                        '<a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">' +
+                        '<span class="mb-1 badge badge-pill badge-warning btn-block">' + data[i].nama_mhs + '</span>' +
+                        '</a>' +
+
+                        '<a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">' +
+                        '<span class="mb-1 badge badge-pill badge-danger btn-block">' + data[i].nim + '</span>' +
+                        '</a>' +
+
+
+                        '<a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">' +
+                        '<span class="mb-1 badge badge-pill badge-success btn-block">' + absen_mhs(data[i].absen) + ';' + data[i].keterangan.toUpperCase() + '</span>' +
+                        '</a>' +
+
+                        '<div class="list-item-heading mb-0 truncate w-40 w-xs-100">' +
+                        '<a href="javascript:;" class="btn btn-secondary btn-sm mb-1 btn-block item_edit" data="' + data[i].id + '"><strong>EDIT</strong></a>' + ' ' +
+                        '</div>' +
+
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+
                 }
                 $('#show_data').html(html);
             }
@@ -35,7 +52,6 @@ $(document).ready(function() {
             dataType: 'json',
             async: false,
             success: function(data) {
-
                 if (data.status_absen == 1) {
                     status = data.status_absen;
                     status = true;
@@ -49,8 +65,8 @@ $(document).ready(function() {
     $('#btn-simpan').on('click', function() {
         console.log(cek_data_absen());
         if (cek_data_absen() == true) {
-            $('#exampleModalLabel').text("Informasi");
-            $('.modal-body').text('Data tidak bisa disimpan karena sudah pernah diinput.');
+            $('#exampleModal #exampleModalLabel').text("Informasi");
+            $('#exampleModal .modal-body').text('Data tidak bisa disimpan karena sudah pernah diinput.');
             $('#exampleModal').modal('show');
         } else {
             $.ajax({
@@ -59,13 +75,13 @@ $(document).ready(function() {
                 dataType: "JSON",
                 data: $("#form-absen form").serialize(), // Ambil semua data yang ada didalam tag form
                 success: function(data) {
-                    $('#exampleModalLabel').text("Informasi");
-                    $('.modal-body').text("Data berhasil disimpan");
+                    tampil_data_absen();
+                    $('#exampleModal #exampleModalLabel').text("Informasi");
+                    $('#exampleModal .modal-body').text("Data berhasil disimpan");
                     $('#exampleModal').modal('show');
+
                 }
             });
-
-            tampil_data_absen();
         }
         return false;
     });
@@ -79,6 +95,7 @@ $(document).ready(function() {
             dataType: "JSON",
             data: { id: id },
             success: function(data) {
+                $('#ModalaEdit #exampleModalLabel').text("Informasi");
                 $.each(data, function(nim, nama, absen, keterangan) {
                     $('#ModalaEdit').modal('show');
                     $('[name="nim_edit"]').val(data.nim);
@@ -110,15 +127,67 @@ $(document).ready(function() {
     });
 
     function absen_mhs(x) {
-        if (x = 'I') {
+        if (x == 'I') {
             return 'IZIN';
-        } else if (x = 'S') {
+        } else if (x == 'S') {
             return 'SAKIT'
-        } else if (x = 'A') {
+        } else if (x == 'A') {
             return 'ALFA';
-        } else if (x = 'H') {
+        } else if (x == 'H') {
             return 'HADIR';
         }
     }
+
+    function load_data(query) {
+        $.ajax({
+            type: 'GET',
+            url: base_url + 'kehadiran/cari',
+            async: true,
+            dataType: 'json',
+            data: { query: query },
+            success: function(data) {
+                var html = '';
+                var i;
+                for (i = 0; i < data.length; i++) {
+                    html += '<div class="card d-flex flex-row mb-3">' +
+                        '<div class="d-flex flex-grow-1 min-width-zero">' +
+                        '<div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">' +
+
+                        '<a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">' +
+                        '<span class="mb-1 badge badge-pill badge-warning btn-block">' + data[i].nama_mhs + '</span>' +
+                        '</a>' +
+
+                        '<a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">' +
+                        '<span class="mb-1 badge badge-pill badge-danger btn-block">' + data[i].nim + '</span>' +
+                        '</a>' +
+
+
+                        '<a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">' +
+                        '<span class="mb-1 badge badge-pill badge-success btn-block">' + absen_mhs(data[i].absen) + ';' + data[i].keterangan.toUpperCase() + '</span>' +
+                        '</a>' +
+
+                        '<div class="list-item-heading mb-0 truncate w-40 w-xs-100">' +
+                        '<a href="javascript:;" class="btn btn-secondary btn-sm btn-block mb-1 item_edit" data="' + data[i].id + '">EDIT</a>' + ' ' +
+                        '</div>' +
+
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+                $('#show_data').html(html);
+            }
+
+        });
+    }
+
+    $('#search_text').keyup(function() {
+        var search = $(this).val();
+        if (search != '') {
+            load_data(search);
+        } else {
+            tampil_data_absen();
+        }
+    });
+
 
 })

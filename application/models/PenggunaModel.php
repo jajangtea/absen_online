@@ -40,20 +40,20 @@ class PenggunaModel extends CI_Model
     //     return ($this->db->affected_rows() > 0) ? true : false;
     // }
 
-    // public function hapus($id)
-    // {
-    //     $this->db->delete('pengguna', array('id' => $id));
-    //     return ($this->db->affected_rows() > 0) ? true : false;
-    // }
+    public function hapus($id)
+    {
+        $this->db->delete('sia_user', array('id' => $id));
+        return ($this->db->affected_rows() > 0) ? true : false;
+    }
 
-    // public function view($id)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('pengguna');
-    //     $this->db->where(array('id' => $id));
+    public function view($id)
+    {
+        $this->db->select('*');
+        $this->db->from('sia_user');
+        $this->db->where(array('id' => $id));
 
-    //     return $this->db->get();
+        return $this->db->get();
 
-    // }
+    }
 
 }

@@ -1,29 +1,51 @@
-<header>
-    <div class="title">
-        <h3>Edit Pengguna</h3>
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <?php if ($this->session->flashdata('pesan_register')) : ?>
+                        <div class="alert alert-success rounded" role="alert">
+                            <?php echo $this->session->flashdata('pesan_register') ?>
+                        </div>
+                    <?php endif ?>
+                    <h4 class="card-title">Registrasi Dosen</h4>
+                    <form action="<?php echo site_url() . 'user/signup' ?>" method="post">
+                        <div class="form-group">
+                            <label for="">Username</label>
+                            <input type="text" class="form-control" name="username" id="username" aria-describedby="helpId" placeholder="" value="<?= $pengguna->username ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nama Lengkap</label>
+                            <input type="text" class="form-control" name="nama" id="nama" aria-describedby="helpId" placeholder="" value="<?= $pengguna->nama ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Role</label>
+                            <select class="form-control" name="role" id="role" value="<?= $pengguna->role ?>">
+                            <option <?php 
+                                        if ( $pengguna->role ='Dosen' )
+                                                echo "selected"; ?> value="1">
+                                            <?= $dosen['nama_dosen'] ?> </option>
+                                <option value="1">Dosen</option>
+                                <option value="2">admin</option>
+                            </select>
+
+                            <div class="form-group">
+                                <label for="">Dosen</label>
+                                <select class="form-control" name="iddosen" id="">
+                                    <?php
+                                    foreach ($data_dosen  as $dosen) { ?>
+                                        <option <?php 
+                                        if ( $pengguna->iddosen ==$dosen['iddosen'] )
+                                                echo "selected"; ?> value="<?php echo $dosen['iddosen'] ?>">
+                                            <?= $dosen['nama_dosen'] ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div class="action">
-        <button type="submit" form="edit-pengguna" class="btn btn-default">Simpan</button>
-    </div>
-</header>
-<form action="<?php echo base_url('index.php/pengguna/ubah') ?>" method="post" id="edit-pengguna">
-<div class="form-group">
-  <label for="nama">Nama</label>
-  <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukan Nama"  value="<?=$pengguna->nama; ?>" aria-describedby="nama">
 </div>
-
-<div class="form-group">
-  <label for="umur">Umur</label>
-  <input type="text" name="umur" id="umur" class="form-control" placeholder="Masukan Umur" value="<?=$pengguna->umur; ?>"  aria-describedby="umur">
-</div>
-
-<div class="form-group">
-  <label for="tanggal_lahir">Tanggal Lahir</label>
-  <input type="text" name="tanggal_lahir" id="tanggal_lahir" class="form-control" placeholder="Masukan Tanggal Lahir"value="<?=$pengguna->tanggal_lahir; ?>"  aria-describedby="tgl_lahir">
-</div>
-
-<div class="form-group">
-  <label for="tanggal_lahir">Tanggal Lahir</label>
-  <input type="text" name="tanggal_lahir" id="tanggal_lahir" class="form-control" placeholder="Masukan Nama" value="<?=$pengguna->jenis_kelamin; ?>" aria-describedby="nama">
-</div>
-</form>

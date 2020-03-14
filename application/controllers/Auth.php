@@ -11,6 +11,7 @@ class Auth extends MY_Controller {
     }
 
     public function index() {
+        $this->config->config["pageTitle"] = 'SIAP - Login';
         if ($this->session->userdata('authenticated')) {
             redirect('presensi/index');
         }
@@ -18,6 +19,7 @@ class Auth extends MY_Controller {
     }
 
     public function login() {
+        $this->config->config["pageTitle"] = 'SIAP - Login';
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $user = $this->UserModel->get($username);

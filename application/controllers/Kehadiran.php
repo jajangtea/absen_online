@@ -54,6 +54,7 @@ class Kehadiran extends MY_Controller
     $nama_kelas                    = $this->session->userdata('kls');
     $data['data_kehadiran_master'] = $this->mp->get_tampil_mahasiswa($idpenyelenggaraan, $nama_kelompok, $nama_kelas);
     //   $data['data_kehadiran'] = $this->mp->get_data_kehadiran($this->session->userdata('hidden_id'));
+    $this->config->config["pageTitle"] = 'Absen Mahasiswa';
     $this->load->view('layouts/header');
     $this->load->view('layouts/sidebar');
     $this->load->view('kehadiran/index', $data);
@@ -62,6 +63,7 @@ class Kehadiran extends MY_Controller
 
   public function tampil_kehadiran()
   {
+    $this->config->config["pageTitle"] = 'Data Mahasiswa';
     $data = $this->mp->get_data_kehadiran($this->session->userdata('hidden_id'));
     echo json_encode($data);
   }
@@ -105,12 +107,13 @@ class Kehadiran extends MY_Controller
   public function edit()
   {
     $id = $this->input->get('id');
+   
     $this->db->select('*');
     $this->db->from('sia_kehadiran vk');
     $this->db->join('master_mhs rk', 'vk.nim=rk.nim');
     $this->db->where('id', $id);
     $e = $this->db->get()->row();
-
+   
     $kirim['id']         = $e->id;
     $kirim['nim']        = $e->nim;
     $kirim['absen']      = $e->absen;
@@ -126,6 +129,13 @@ class Kehadiran extends MY_Controller
     $absen      = $this->input->post('absen');
     $keterangan = $this->input->post('keterangan');
     $data       = $this->mk->update_absen($id, $absen, $keterangan);
+    echo json_encode($data);
+  }
+
+  public function cari()
+  {
+    $query=$this->input->get('query');
+    $data = $this->mp->cari_data($query);
     echo json_encode($data);
   }
 }

@@ -7,12 +7,12 @@ class Pengguna extends MY_Controller
         parent::__construct();
         $this->load->model('PenggunaModel');
         $this->load->library('form_validation');
-        
+        $this->load->model('RegisterModel');
     }
 
     public function index()
     {
-
+        $this->config->config["pageTitle"] = 'Data Dosen';
         $data['semua_data'] = $this->PenggunaModel->tampilSemua();
         $this->load->view('layouts/header');
         $this->load->view('layouts/sidebar');
@@ -29,22 +29,26 @@ class Pengguna extends MY_Controller
         $this->load->view('layouts/footer');
     }
 
-    public function edit($id)
+    public function edit($id=null)
     {
-        $data['pengguna']=$this->Pengguna->view($id)->row();
+        $this->config->config["pageTitle"] = 'Edit Pengguna';
+        $data['data_dosen'] = $this->RegisterModel->get_dosen();
+        $data['pengguna']=$this->PenggunaModel->view($id)->row();
         $this->load->view('layouts/header');
-        $this->load->view('Pengguna/update',$data);
+        $this->load->view('layouts/sidebar');
+        $this->load->view('pengguna/update', $data);
         $this->load->view('layouts/footer');
+
     }
 
     public function hapus($id){
-        if($this->Pengguna->hapus($id) == TRUE) {
+        if($this->PenggunaModel->hapus($id) == TRUE) {
             $this->session->set_flashdata('hapus', true);
        }
        else {
             $this->session->set_flashdata('hapus', false);
        }
-       redirect(base_url());
+       redirect(base_url().'pengguna');
     }
 
     public function simpan()
@@ -67,7 +71,7 @@ class Pengguna extends MY_Controller
             $this->load->view('pengguna/create');
             $this->load->view('layouts/footer');
         } else {
-            $this->session->set_flashdata('tambah', flase);
+            $this->session->set_flashdata('tambah', false);
             $this->Pengguna->tambah($data) == true;
             redirect(base_url());
         }

@@ -18,7 +18,6 @@
 <script src="<?php echo base_url() ?>assets/dore/js/vendor/mousetrap.min.js"></script>
 <script src="<?php echo base_url() ?>assets/dore/js/dore.script.js"></script>
 <script src="<?php echo base_url() ?>assets/dore/js/scripts.js"></script>
-
 <script src="<?php echo base_url() ?>assets/dore/js/vendor/perfect-scrollbar.min.js"></script>
 <script src="<?php echo base_url() ?>assets/dore/js/vendor/jquery.validate/jquery.validate.min.js"></script>
 <script src="<?php echo base_url() ?>assets/dore/js/vendor/jquery.validate/additional-methods.min.js"></script>

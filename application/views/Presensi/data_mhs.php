@@ -19,8 +19,10 @@
                 <div class="card-body">
                     <h4 class="card-title"><i class="simple-icon-event"></i> Info Kelas</h4>
                     <h2>
-                        <?= $this->session->userdata('nmatkul') ?>                        
-                        <!--<small><span class="badge badge-pill badge-danger"> <?php //$data_jam_ngajar->jam_masuk;           ?> - <?php //$data_jam_ngajar->jam_keluar;           ?></span></small>-->
+                        <?= $this->session->userdata('nmatkul') ?>
+                        <!--<small><span class="badge badge-pill badge-danger"> <?php //$data_jam_ngajar->jam_masuk;           
+                                                                                ?> - <?php //$data_jam_ngajar->jam_keluar;           
+                                                                                        ?></span></small>-->
 
                     </h2>
                     <footer>
@@ -37,9 +39,8 @@
                     <div class="col-lg-12 col-md-12 mb-2">
                         <form action="<?php echo site_url() . 'presensi/tampil_kelompok' ?>" method="post">
                             <div class="btn-group  mb-2">
-                                <button type="submit" class="btn btn-primary">Pilih Kelompok :  <?= PresensiModel::get_nama_kelompok($this->session->userdata('nama_kelompok')) ?></button>
-                                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="submit" class="btn btn-primary">Pilih Kelompok : <?= PresensiModel::get_nama_kelompok($this->session->userdata('nama_kelompok')) ?></button>
+                                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu" id="nama_kelompok" name="nama_kelompok">
@@ -50,7 +51,7 @@
                                     ?>
                                 </div>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -67,30 +68,33 @@
                         <form action="<?php echo site_url() . 'kehadiran' ?>" method="POST">
                             <input type="hidden" id="hidden1" value="" name="hidden1" />
                             <input type="hidden" id="hidden_id" value="" name="hidden_id" />
-                            <table class="table table-hover" id="table">
-                                <thead>
-                                    <tr>
-                                        <th>PERTEMUAN</th>
-                                        <th scope="col">STATUS</th>
-                                        <th scope="col">AKSI</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if ($data_kehadiran_master->num_rows() > 0): ?>
-                                        <?php foreach ($data_kehadiran_master->result() as $data): ?>
-                                            <tr>
-                                                <td style="display:none;"><?= $data->id ?></td>
-                                                <td>Ke-<?= $data->pertemuan ?></td>
-                                                <td>
-                                                    <?= ($data->status) == '' ? '<span class="mb-2 badge badge-pill badge-danger">Belum Absen</span>' : '<span class="mb-2 badge badge-pill badge-primary">' . $data->status . '</span>' ?></span>
-
-                                                </td>
-                                                <td><input type="submit" class="btn btn-primary btn-xs mb-1" value="GO"></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table" id="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center;">PERTEMUAN</th>
+                                            <th style="text-align: center;">STATUS</th>
+                                            <th style="text-align: center;">TGL.ABSEN</th>
+                                            <th style="text-align: center;">AKSI</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if ($data_kehadiran_master->num_rows() > 0) : ?>
+                                            <?php foreach ($data_kehadiran_master->result() as $data) : ?>
+                                                <tr>
+                                                    <td style="display:none;"><?= $data->id ?></td>
+                                                    <td style="text-align: center;">Ke-<?= $data->pertemuan ?></td>
+                                                    <td style="text-align: center;">
+                                                        <?= ($data->status) == '' ? '<span class="mb-2 badge badge-pill badge-danger">Belum</span>' : '<span class="mb-2 badge badge-pill badge-success">' . $data->status . '</span>' ?></span>
+                                                    </td>
+                                                    <td style="text-align: center;"><?=PresensiModel::get_day($data->tanggal).' '. $data->tanggal ?></td>
+                                                    <td style="text-align: center;"><input type="submit" class="btn btn-primary btn-xs mb-1" value="GO"></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -101,7 +105,7 @@
 <script>
     var table = document.getElementById("table");
     for (var i = 1; i < table.rows.length; i++) {
-        table.rows[i].onclick = function () {
+        table.rows[i].onclick = function() {
             document.getElementById("hidden_id").value = this.cells[0].innerHTML;
             document.getElementById("hidden1").value = this.cells[1].innerHTML;
         };
