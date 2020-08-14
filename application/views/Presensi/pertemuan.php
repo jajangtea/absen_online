@@ -3,7 +3,7 @@
         <div class="form-group col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"><i class="simple-icon-user"></i> Dosen</h4>
+                    <h4 class="card-title"><i class="simple-icon-user"></i> Mahasiswa</h4>
                     <h2>
                         <?php echo $this->session->userdata('nama') ?>
                     </h2>
@@ -17,47 +17,18 @@
         <div class="form-group col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"><i class="simple-icon-event"></i> Info Kelas</h4>
+                    <h4 class="card-title"><i class="simple-icon-event"></i> Info Matakuliah</h4>
                     <h2>
-                        <?= $this->session->userdata('nmatkul') ?>
-                        <!--<small><span class="badge badge-pill badge-danger"> <?php //$data_jam_ngajar->jam_masuk;           
-                                                                                ?> - <?php //$data_jam_ngajar->jam_keluar;           
-                                                                                        ?></span></small>-->
-
+                        <?= $nmatkul ?>
                     </h2>
                     <footer>
-                        <p class="text-muted text-small mb-0 font-weight-light"><?= PresensiModel::get_prodi($this->session->userdata('kjur')); ?> - <?= PresensiModel::get_kelas($this->session->userdata('kls')) ?> - (<?= PresensiModel::get_nama_kelompok($this->session->userdata('nama_kelompok')) ?>)</p>
+                        <p class="text-muted text-small mb-0 font-weight-light"><?= $nmdosen ?> </p>
                     </footer>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 mb-2">
-            <div class="card">
-                <div class="card-body">
-                    <div class="col-lg-12 col-md-12 mb-2">
-                        <form action="<?php echo site_url() . 'presensi/tampil_kelompok' ?>" method="post">
-                            <div class="btn-group  mb-2">
-                                <button type="button" class="btn btn-primary">Pilih Kelompok : <?= PresensiModel::get_nama_kelompok($this->session->userdata('nama_kelompok')) ?></button>
-                                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <div class="dropdown-menu" id="nama_kelompok" name="nama_kelompok">
-                                    <?php
-                                    foreach ($data_nama_kelas as $row) {
-                                        echo "<a class='dropdown-item' href='" . site_url() . "presensi/tampil_kelompok/" . $row['nama_kelas'] . "'>" . PresensiModel::get_nama_kelompok($row['nama_kelas']) . "</a>";
-                                    }
-                                    ?>
-                                </div>
-                            </div>
 
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col-md-12 mb-4">
             <div class="card">
@@ -65,7 +36,7 @@
                     <h4 class="card-title">Pertemuan</h4>
                     <span class="mb-2 badge badge-pill badge-info">TEKAN TOMBOL GO UNTUK MELAKUKAN ABSEN</span>
                     <div class="col-lg-12 col-md-12 mb-4">
-                        <form action="<?php echo site_url() . 'kehadiran' ?>" method="POST">
+                        <form action="<?php echo site_url() . 'kehadiran/do_absen' ?>" method="POST">
                             <input type="hidden" id="hidden1" value="" name="hidden1" />
                             <input type="hidden" id="hidden_id" value="" name="hidden_id" />
                             <div class="table-responsive">
@@ -79,8 +50,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if ($data_kehadiran_master->num_rows() > 0) : ?>
-                                            <?php foreach ($data_kehadiran_master->result() as $data) : ?>
+                                        <?php if ($data_kehadiran_pertemuan->num_rows() > 0) : ?>
+                                            <?php foreach ($data_kehadiran_pertemuan->result() as $data) : ?>
                                                 <tr>
                                                     <td style="display:none;"><?= $data->id ?></td>
                                                     <td style="text-align: center;">Ke-<?= $data->pertemuan ?></td>
@@ -91,6 +62,10 @@
                                                     <td style="text-align: center;"><input type="submit" class="btn btn-primary btn-xs mb-1" value="GO"></td>
                                                 </tr>
                                             <?php endforeach; ?>
+                                        <?php else : ?>
+                                            <tr>
+                                                <td colspan="4" style="text-align: center;"> <span class="mb-2 badge badge-pill badge-danger">DOSEN BELUM MEMBUKA AKSES ABSEN.</span></td>
+                                            </tr>
                                         <?php endif; ?>
                                     </tbody>
                                 </table>

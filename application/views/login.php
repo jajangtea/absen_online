@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-side">
                             <a href="#">
-                                <h3>SISTEM INFORMASI ABSENSI DAN PRESENSI (SIAP)</h3>
+                                <h3>SISTEM INFORMASI ABSENSI & PRESENSI (SIAP)</h3>
                                 <p>STT Indonesia Tanjungpinang</p>
                             </a>
                             <h6 class="mb-4">Login</h6>

@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?=$this->config->config["pageTitle"]?></title>
-   
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/font/iconsmind-s/css/iconsminds.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/font/simple-line-icons/css/simple-line-icons.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap.rtl.only.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/fullcalendar.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/dataTables.bootstrap4.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/datatables.responsive.bootstrap4.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/select2.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/perfect-scrollbar.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/owl.carousel.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap-stars.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/nouislider.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap-datepicker3.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/component-custom-switch.min.css" />
-     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/main.css" />
+    <title><?= $this->config->config["pageTitle"] ?></title>
+
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/font/iconsmind-s/css/iconsminds.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/font/simple-line-icons/css/simple-line-icons.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap.rtl.only.min.css" />
+    <!-- <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/fullcalendar.min.css" /> -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/datatables.responsive.bootstrap4.min.css" />
+    <!-- <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/select2.min.css" /> -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/perfect-scrollbar.css" />
+    <!-- <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/owl.carousel.min.css" /> -->
+    <!-- <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap-stars.css" /> -->
+    <!-- <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/nouislider.min.css" /> -->
+    <!-- <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/bootstrap-datepicker3.min.css" /> -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/vendor/component-custom-switch.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/dore/css/main.css" />
     <!-- </style> -->
     <script>
-    var base_url = '<?= base_url() ?>' // Buat variabel base_url agar bisa di akses di semua file js
+        var base_url = '<?= base_url() ?>' // Buat variabel base_url agar bisa di akses di semua file js
     </script>
 </head>
+
 <body id="app-container" class="menu-default show-spinner">
-<nav class="navbar fixed-top">
+    <nav class="navbar fixed-top">
         <div class="d-flex align-items-center navbar-left">
             <a href="" class="menu-button d-none d-md-block">
                 <svg class="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 17">
@@ -50,27 +52,25 @@
                 </svg>
             </a>
 
-            <div class="search" data-search-path="Pages.Search.html?q=">
-                <input placeholder="Search...">
+            <div class="search">
+                <input placeholder="Search..." name="search_mhs" id="search_mhs">
                 <span class="search-icon">
                     <i class="simple-icon-magnifier"></i>
                 </span>
             </div>
 
-            
+
         </div>
 
 
         <a class="navbar-logo" href="<?php echo base_url() ?>assets/dore/Dashboard.Default.html">
-            <span class="logo d-none d-xs-block"></span>
-            <span class="logo-mobile d-block d-xs-none"></span>
+
         </a>
 
         <div class="navbar-right">
             <div class="header-icons d-inline-block align-middle">
                 <div class="position-relative d-none d-sm-inline-block">
-                    <button class="header-icon btn btn-empty" type="button" id="iconMenuButton" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <button class="header-icon btn btn-empty" type="button" id="iconMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="simple-icon-grid"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right mt-3  position-absolute" id="iconMenuDropdown">
@@ -106,16 +106,15 @@
 
                     </div>
                 </div>
-               
+
 
             </div>
 
             <div class="user d-inline-block">
-                <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
+                <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="name"><?php echo $this->session->userdata('nama') ?></span>
                     <span>
-<!--                        <img alt="Profile Picture" src="" />-->
+                        <!--                        <img alt="Profile Picture" src="" />-->
                     </span>
                 </button>
 
@@ -124,26 +123,26 @@
                     <a class="dropdown-item" href="">Features</a>
                     <a class="dropdown-item" href="">History</a>
                     <a class="dropdown-item" href="">Support</a>
-                    <a class="dropdown-item" href="<?php echo base_url().'auth/logout'?>">Sign out</a>
+                    <a class="dropdown-item" href="<?php echo base_url() . 'auth/logout' ?>">Sign out</a>
                 </div>
             </div>
         </div>
     </nav>
     <main>
-    <div class="container-fluid">
-    <div class="row">
-    <div class="col-12">
-                <h1>Dashboard</h1>
-                <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
-                    <ol class="breadcrumb pt-0">
-                        <li class="breadcrumb-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="#">Library</a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">Data</li>
-                    </ol>
-                </nav>
-                <div class="separator mb-5"></div>
-            </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Dashboard</h1>
+                    <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-0">
+                            <li class="breadcrumb-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">Library</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        </ol>
+                    </nav>
+                    <div class="separator mb-5"></div>
+                </div>

@@ -9,6 +9,7 @@
                             <h4 class="card-title"><i class="simple-icon-user"></i> Dosen</h4>
                             <h2>
                                 <?php echo $this->session->userdata('nama') ?>
+                                
                             </h2>
                             <footer>
                                 <p class="text-muted text-small mb-0 font-weight-light"><?= date('d-M-Y') ?></p>
@@ -34,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-12 mb-4">
             <div class="card">
                 <div class="card-body">
@@ -56,7 +57,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div class="col-12 list" data-check-all="checkAll">
             <?php if ($sql_jadwal_dosen->num_rows() > 0) : ?>

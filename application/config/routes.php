@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -49,8 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Auth'; 
-$route['signout'] = 'LoginController/actionLogout'; 
+$route['default_controller'] = 'Auth';
+$route['signout'] = 'LoginController/actionLogout';
 
 $route['pengguna'] = 'Pengguna/index';
 $route['pengguna/tambah'] = 'Pengguna/tambah';
@@ -58,11 +58,12 @@ $route['pengguna/simpan'] = 'pengguna_controller/simpan';
 $route['pengguna/edit/(:num)'] = 'Pengguna/edit/$1';
 $route['pengguna/hapus/(:num)'] = 'Pengguna/hapus/$1';
 
-$route['buku/index']='BukuController/index';
+$route['buku/index'] = 'BukuController/index';
 $route['buku/view/(:num)'] = 'BukuController/view/$1';
 $route['buku/delete/(:num)'] = 'BukuController/delete/$1';
 
-$route['presensi']='PresensiController/actionIndex';
-$route['presensi/home']='presensi/index';
+$route['presensi'] = 'PresensiController/actionIndex';
+$route['presensi/absen'] = 'presensi/tampilKrs';
+$route['presensi/home'] = 'presensi/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
